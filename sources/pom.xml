@@ -45,9 +45,9 @@
         </dependency>
 
         <dependency>
-            <groupId>javadbf</groupId>
+            <groupId>com.linuxense</groupId>
             <artifactId>javadbf</artifactId>
-            <version>1.0</version>
+            <version>0.4.0</version>
         </dependency>
 
         <dependency>
@@ -95,6 +95,10 @@
             <id>spring-milestone</id>
             <name>Spring Maven MILESTONE Repository</name>
             <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
+            <id>javadbf</id>
+            <url>http://repo.keyintegrity.com/maven2</url>
         </repository>
     </repositories>
 </project>
