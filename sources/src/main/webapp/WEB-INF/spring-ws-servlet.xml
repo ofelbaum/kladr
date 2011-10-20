@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:sws="http://www.springframework.org/schema/web-services"
+       xmlns:oxm="http://www.springframework.org/schema/oxm"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+  http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
+  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
+
+    <context:component-scan base-package="com.app.webservice"/>
+
+    <sws:annotation-driven/>
+
+    <sws:dynamic-wsdl id="holiday"
+                      portTypeName="HumanResource"
+                      locationUri="/holidayService/"
+                      targetNamespace="http://mycompany.com/hr/definitions">
+        <sws:xsd location="/WEB-INF/hr.xsd"/>
+    </sws:dynamic-wsdl>
+
+    <bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
+        <description>An endpoint mapping strategy that looks for @Endpoint and @PayloadRoot annotations.</description>
+    </bean>
+
+    <bean class="org.springframework.ws.server.endpoint.adapter.method.MarshallingPayloadMethodProcessor">
+        <property name="marshaller" ref="marshaller"/>
+        <property name="unmarshaller" ref="marshaller"/>
+    </bean>
+
+    <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <!--<property name="contextPath" value="com.app.xml"/>-->
+        <property name="classesToBeBound">
+            <list>
+                <value>com.app.xml.EmployeeType</value>
+                <value>com.app.xml.HolidayRequest</value>
+                <value>com.app.xml.HolidayType</value>
+            </list>
+        </property>
+        <property name="schema" value="WEB-INF/hr.xsd"/>
+    </bean>
+</beans>
