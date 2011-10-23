@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/")
 public class HelloWorldController {
 
-    @RequestMapping("/{id1}/{id2}")
+    @RequestMapping("")
     @ResponseBody
-    public Object doAction(@PathVariable("id1") String id1) {
+    public Object doAction() {
         return "OK";
     }
 }
