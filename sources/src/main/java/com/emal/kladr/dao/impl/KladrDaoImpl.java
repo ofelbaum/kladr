@@ -1,8 +1,8 @@
-package com.app.dao.impl;
+package com.emal.kladr.dao.impl;
 
-import com.app.dao.AbstractDaoImpl;
-import com.app.dao.KladrDao;
-import com.app.domain.Kladr;
+import com.emal.kladr.dao.AbstractDaoImpl;
+import com.emal.kladr.dao.KladrDao;
+import com.emal.kladr.domain.Kladr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
  * Date: 15.10.11 22:22
  */
 @Component
-public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao{
+public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
     private static final Logger log = LoggerFactory.getLogger(KladrDaoImpl.class);
 
     @Override

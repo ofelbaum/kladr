@@ -1,7 +1,7 @@
-package com.app.service;
+package com.emal.kladr.service;
 
-import com.app.dao.KladrDao;
-import com.app.domain.Kladr;
+import com.emal.kladr.dao.KladrDao;
+import com.emal.kladr.domain.Kladr;
 import com.linuxense.javadbf.DBFReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,16 +1,18 @@
-package com.app.domain;
+package com.emal.kladr.domain;
 
 /**
  * User: admin
  * Date: 19.10.11 23:29
  */
-public class Flat {
+public class Dom {
     private String name;
+    private String korp;
+    private String socr;
     private String code;
     private String postIndex;
     private String gninmb;
     private String uno;
-    private String np;
+    private String ocatd;
 
     public String getName() {
         return name;
@@ -18,6 +20,22 @@ public class Flat {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getKorp() {
+        return korp;
+    }
+
+    public void setKorp(String korp) {
+        this.korp = korp;
+    }
+
+    public String getSocr() {
+        return socr;
+    }
+
+    public void setSocr(String socr) {
+        this.socr = socr;
     }
 
     public String getCode() {
@@ -52,11 +70,11 @@ public class Flat {
         this.uno = uno;
     }
 
-    public String getNp() {
-        return np;
+    public String getOcatd() {
+        return ocatd;
     }
 
-    public void setNp(String np) {
-        this.np = np;
+    public void setOcatd(String ocatd) {
+        this.ocatd = ocatd;
     }
 }

@@ -1,4 +1,4 @@
-package com.app.dao.impl;
+package com.emal.kladr.dao.impl;
 
 import com.linuxense.javadbf.DBFException;
 import com.linuxense.javadbf.DBFField;

@@ -1,6 +1,6 @@
-package com.app.dao;
+package com.emal.kladr.dao;
 
-import com.app.domain.EntityMetadata;
+import com.emal.kladr.domain.EntityMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

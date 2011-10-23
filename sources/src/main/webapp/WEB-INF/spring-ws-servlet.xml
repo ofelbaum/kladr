@@ -8,7 +8,7 @@
   http://www.springframework.org/schema/web-services http://www.springframework.org/schema/web-services/web-services-2.0.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-3.0.xsd">
 
-    <context:component-scan base-package="com.app.webservice"/>
+    <context:component-scan base-package="com.emal.kladr.webservice"/>
 
     <sws:annotation-driven/>
 
@@ -32,9 +32,9 @@
         <!--<property name="contextPath" value="com.app.xml"/>-->
         <property name="classesToBeBound">
             <list>
-                <value>com.app.xml.EmployeeType</value>
-                <value>com.app.xml.HolidayRequest</value>
-                <value>com.app.xml.HolidayType</value>
+                <value>com.emal.kladr.xml.EmployeeType</value>
+                <value>com.emal.kladr.xml.HolidayRequest</value>
+                <value>com.emal.kladr.xml.HolidayType</value>
             </list>
         </property>
         <property name="schema" value="WEB-INF/hr.xsd"/>

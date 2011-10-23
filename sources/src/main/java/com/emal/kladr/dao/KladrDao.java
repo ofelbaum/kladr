@@ -1,6 +1,6 @@
-package com.app.dao;
+package com.emal.kladr.dao;
 
-import com.app.domain.Kladr;
+import com.emal.kladr.domain.Kladr;
 
 /**
  * User: admin

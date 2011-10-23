@@ -1,6 +1,6 @@
-package com.app.xml;
+package com.emal.kladr.xml;
 
-import com.app.webservice.HolidayEndpoint;
+import com.emal.kladr.webservice.HolidayEndpoint;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

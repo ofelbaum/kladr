@@ -1,4 +1,4 @@
-package com.app.domain;
+package com.emal.kladr.domain;
 
 /**
  * User: admin

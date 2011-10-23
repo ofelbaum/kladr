@@ -1,10 +1,10 @@
-package com.app.webservice;
+package com.emal.kladr.webservice;
 
 import java.util.Date;
 
-import com.app.dao.KladrDao;
-import com.app.service.HumanResourceService;
-import com.app.xml.HolidayRequest;
+import com.emal.kladr.dao.KladrDao;
+import com.emal.kladr.service.HumanResourceService;
+import com.emal.kladr.xml.HolidayRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;

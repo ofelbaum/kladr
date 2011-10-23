@@ -1,4 +1,4 @@
-package com.app.service;
+package com.emal.kladr.service;
 
 import org.springframework.stereotype.Service;
 
