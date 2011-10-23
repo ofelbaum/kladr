@@ -1,0 +1,31 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:kld="http://mycompany.com/hr/schemas"
+        elementFormDefault="qualified"
+        targetNamespace="http://mycompany.com/hr/schemas">
+    <xs:element name="KladrRequest">
+        <xs:complexType>
+            <xs:all>
+                <xs:element name="codePrefix" type="xs:string"/>
+            </xs:all>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="KladrResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="kladr" type="kld:Kladr"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="Kladr">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="socr" type="xs:string"/>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="postIndex" type="xs:string"/>
+            <xs:element name="gninmb" type="xs:string"/>
+            <xs:element name="uno" type="xs:string"/>
+            <xs:element name="ocatd" type="xs:string"/>
+            <xs:element name="status" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

@@ -1,11 +1,11 @@
 package com.emal.kladr.rest;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.emal.kladr.service.AddressService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * User: admin
@@ -14,12 +14,19 @@ import java.io.UnsupportedEncodingException;
 @Controller
 @RequestMapping("/")
 public class HelloWorldController {
-    private static ObjectMapper objectMapper = new ObjectMapper();
 
-    @RequestMapping("")
-    public void doAction(HttpServletResponse response) throws UnsupportedEncodingException {
-        JSONOperationResponse jsonOperationResponse = new JSONOperationResponse();
-        jsonOperationResponse.setData("Привет!!!");
-        JSONHelper.fillResponse(objectMapper, response, jsonOperationResponse);
+    @Autowired
+    private AddressService addressService;
+
+    @RequestMapping({"{codePrefix}"})
+    @ResponseBody
+    public Object getByCodePrefix(@PathVariable("codePrefix") String codePrefix) {
+        return addressService.getKladrsByCode(codePrefix);
+    }
+
+    @RequestMapping("/subjects")
+    @ResponseBody
+    public Object getRFSubjects() {
+        return addressService.getRFSubjects();
     }
 }

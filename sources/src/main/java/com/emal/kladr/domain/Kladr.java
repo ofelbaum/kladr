@@ -1,5 +1,13 @@
 package com.emal.kladr.domain;
 
+import com.emal.kladr.webservice.HolidayEndpoint;
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * User: admin
  * Date: 19.10.11 23:29
@@ -12,14 +20,32 @@ package com.emal.kladr.domain;
  * АА – признак актуальности адресного объекта.
  *
  */
+@XmlType(name = "kladr", namespace = HolidayEndpoint.NAMESPACE_URI)
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Kladr extends EntityMetadata{
+
+    @XmlElement(name = "number", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String name;
+
+    @XmlElement(name = "socr", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String socr;
+
+    @XmlElement(name = "code", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String code;
+
+    @XmlElement(name = "postIndex", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String postIndex;
+
+    @XmlElement(name = "gninmb", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String gninmb;
+
+    @XmlElement(name = "uno", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String uno;
+
+    @XmlElement(name = "ocatd", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String ocatd;
+
+    @XmlElement(name = "status", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String status;
 
     public Kladr() {
@@ -101,21 +127,25 @@ public class Kladr extends EntityMetadata{
     }
 
     @Override
+    @JsonIgnore
     public String getTableName() {
         return "KLADR";
     }
 
     @Override
+    @JsonIgnore
     public String[] getColumns() {
         return new String[]{"name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd", "status"};
     }
 
     @Override
+    @JsonIgnore
     public Object[] getValues() {
         return new String[]{name, socr, code, postIndex, gninmb, uno, ocatd, status};
     }
 
     @Override
+    @JsonIgnore
     public String toString() {
         return new StringBuffer(name)
                 .append(" ")

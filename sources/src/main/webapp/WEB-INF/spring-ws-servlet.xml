@@ -14,9 +14,15 @@
 
     <sws:dynamic-wsdl id="holiday"
                       portTypeName="HumanResource"
-                      locationUri="/holidayService/"
+                      locationUri="/ws/holidayService/"
                       targetNamespace="http://mycompany.com/hr/definitions">
         <sws:xsd location="/WEB-INF/hr.xsd"/>
+    </sws:dynamic-wsdl>
+    <sws:dynamic-wsdl id="kladr"
+                      portTypeName="KladrResource"
+                      locationUri="/ws/addressService/"
+                      targetNamespace="http://mycompany.com/hr/definitions">
+        <sws:xsd location="/WEB-INF/kladr.xsd"/>
     </sws:dynamic-wsdl>
 
     <bean class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
@@ -35,6 +41,8 @@
                 <value>com.emal.kladr.xml.EmployeeType</value>
                 <value>com.emal.kladr.xml.HolidayRequest</value>
                 <value>com.emal.kladr.xml.HolidayType</value>
+                <value>com.emal.kladr.xml.KladrRequest</value>
+                <value>com.emal.kladr.domain.Kladr</value>
             </list>
         </property>
         <property name="schema" value="WEB-INF/hr.xsd"/>
