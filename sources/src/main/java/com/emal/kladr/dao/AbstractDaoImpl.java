@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,15 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
             throw new IllegalStateException("Not unique result for code [" + code + "]");
         }
         return results.get(0);
+    }
+
+    @Override
+    public List<T> getListByCode(String codePrefix) {
+        String query = "select * from " + getDaoTable() + ";";
+        if (StringUtils.hasText(codePrefix)) {
+            query = "select * from " + getDaoTable() + " where code like '" + codePrefix + "%';";
+        }
+        return jdbcTemplate.query(query, getRowMapper());
     }
 
     private String[] convert(List<String> list) {

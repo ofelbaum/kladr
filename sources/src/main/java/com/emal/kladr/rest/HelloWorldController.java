@@ -1,9 +1,11 @@
 package com.emal.kladr.rest;
 
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 
 /**
  * User: admin
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/")
 public class HelloWorldController {
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
     @RequestMapping("")
-    @ResponseBody
-    public Object doAction() {
-        return "OK";
+    public void doAction(HttpServletResponse response) throws UnsupportedEncodingException {
+        JSONOperationResponse jsonOperationResponse = new JSONOperationResponse();
+        jsonOperationResponse.setData("Привет!!!");
+        JSONHelper.fillResponse(objectMapper, response, jsonOperationResponse);
     }
 }

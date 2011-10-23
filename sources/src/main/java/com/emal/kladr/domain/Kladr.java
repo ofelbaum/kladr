@@ -3,6 +3,14 @@ package com.emal.kladr.domain;
 /**
  * User: admin
  * Date: 19.10.11 23:29
+ * Структура кодового обозначения в блоке "Код":
+ * СС РРР ГГГ ППП АА, где
+ * СС – код субъекта Российской Федерации (региона), коды регионов представлены в Приложении 2 к Описанию классификатора адресов Российской Федерации (КЛАДР);
+ * РРР – код района;
+ * ГГГ – код города;
+ * ППП – код населенного пункта,
+ * АА – признак актуальности адресного объекта.
+ *
  */
 public class Kladr extends EntityMetadata{
     private String name;
@@ -106,4 +114,9 @@ public class Kladr extends EntityMetadata{
     public Object[] getValues() {
         return new String[]{name, socr, code, postIndex, gninmb, uno, ocatd, status};
     }
+
+//    @Override
+//    public String toString() {
+//        return name;
+//    }
 }

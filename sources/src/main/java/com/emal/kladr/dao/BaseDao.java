@@ -13,4 +13,5 @@ public interface BaseDao<T extends EntityMetadata> {
     public void insert(List<T> list);
     public void deleteAll();
     public T getByCode(String code);
+    public List<T> getListByCode(String codePrefix);
 }

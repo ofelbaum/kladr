@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * User: admin
@@ -18,6 +19,11 @@ import java.sql.SQLException;
 @Component
 public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
     private static final Logger log = LoggerFactory.getLogger(KladrDaoImpl.class);
+
+    @Override
+    public List<Kladr> getRFSubjects() {
+        return jdbcTemplate.query("select * from " + getDaoTable() + " where code like '%00000000000' order by code ASC;", getRowMapper());
+    }
 
     @Override
     protected String getDaoTable() {
