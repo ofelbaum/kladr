@@ -1,13 +1,11 @@
 package com.emal.kladr.web;
 
-import com.emal.kladr.dao.KladrDao;
 import com.emal.kladr.domain.Kladr;
 import com.emal.kladr.service.AddressService;
 import com.vaadin.Application;
 import com.vaadin.data.Property;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -18,7 +16,7 @@ import java.util.Locale;
  * User: admin
  * Date: 22.10.11 15:24
  */
-@Configurable(preConstruction = true)
+@Component("application")
 public class MyVaadinApplication extends Application {
     private Window window;
     private TextField textField;

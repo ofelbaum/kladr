@@ -115,8 +115,10 @@ public class Kladr extends EntityMetadata{
         return new String[]{name, socr, code, postIndex, gninmb, uno, ocatd, status};
     }
 
-//    @Override
-//    public String toString() {
-//        return name;
-//    }
+    @Override
+    public String toString() {
+        return new StringBuffer(name)
+                .append(" ")
+                .append(socr).toString();
+    }
 }
