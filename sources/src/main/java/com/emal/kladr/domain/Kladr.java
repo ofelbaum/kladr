@@ -151,4 +151,9 @@ public class Kladr extends EntityMetadata{
                 .append(" ")
                 .append(socr).toString();
     }
+
+    @JsonIgnore
+    public String getArea() {
+        return code.substring(0, 2);
+    }
 }

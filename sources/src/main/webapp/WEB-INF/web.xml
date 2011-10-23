@@ -58,7 +58,7 @@
         <servlet-class>com.emal.kladr.web.SpringVaadinServlet</servlet-class>
         <init-param>
             <param-name>application</param-name>
-            <param-value>com.emal.kladr.web.MyVaadinApplication</param-value>
+            <param-value>com.emal.kladr.web.KladrWebApplication</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
