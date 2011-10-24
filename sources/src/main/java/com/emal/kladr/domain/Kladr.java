@@ -23,8 +23,9 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "kladr", namespace = HolidayEndpoint.NAMESPACE_URI)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kladr extends EntityMetadata{
+    public static final Kladr EMPTY_VALUE = new Kladr("+", "empty", "0000000000000", "000000", "0000", "000", "000000", "00");
 
-    @XmlElement(name = "number", namespace = HolidayEndpoint.NAMESPACE_URI)
+    @XmlElement(name = "name", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String name;
 
     @XmlElement(name = "socr", namespace = HolidayEndpoint.NAMESPACE_URI)
@@ -153,7 +154,23 @@ public class Kladr extends EntityMetadata{
     }
 
     @JsonIgnore
-    public String getArea() {
+    public String getSubject() {
         return code.substring(0, 2);
     }
+
+    @JsonIgnore
+    public String getDistrict() {
+        return code.substring(2, 5);
+    }
+
+    @JsonIgnore
+    public String getCity() {
+        return code.substring(5, 8);
+    }
+
+    @JsonIgnore
+    public String getCountry() {
+        return code.substring(8, 11);
+    }
+
 }

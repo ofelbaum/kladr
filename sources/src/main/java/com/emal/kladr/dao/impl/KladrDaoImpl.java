@@ -22,7 +22,38 @@ public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
 
     @Override
     public List<Kladr> getRFSubjects() {
-        return jdbcTemplate.query("select * from " + getDaoTable() + " where code like '%00000000000' order by code ASC;", getRowMapper());
+        String sql = "select * from " + getDaoTable() + " where code like '%00000000000' order by name ASC;";
+        log.debug("Query [ " + sql +" ]");
+        List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
+        log.debug("Result set size [ " + list.size() + " ]");
+        return list;
+    }
+
+    @Override
+    public List<Kladr> getDistricts(String subject) {
+        String sql = "select * from " + getDaoTable() + " where code like '" + subject + "%00000000' order by name ASC;";
+        log.debug("Query [ " + sql +" ]");
+        List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
+        log.debug("Result set size [ " + list.size() + " ]");
+        return list;
+    }
+
+    @Override
+    public List<Kladr> getCities(String subject, String district) {
+        String sql = "select * from " + getDaoTable() + " where code like '" + subject + district + "%00000' order by name ASC;";
+        log.debug("Query [ " + sql +" ]");
+        List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
+        log.debug("Result set size [ " + list.size() + " ]");
+        return list;
+    }
+
+    @Override
+    public List<Kladr> getCountries(String subject, String district, String city) {
+        String sql = "select * from " + getDaoTable() + " where code like '" + subject + district + city + "%00' order by name ASC;";
+        log.debug("Query [ " + sql +" ]");
+        List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
+        log.debug("Result set size [ " + list.size() + " ]");
+        return list;
     }
 
     @Override

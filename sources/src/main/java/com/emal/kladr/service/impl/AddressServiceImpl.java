@@ -32,4 +32,19 @@ public class AddressServiceImpl implements AddressService{
     public List<Kladr> getRFSubjects() {
         return kladrDao.getRFSubjects();
     }
+
+    @Override
+    public List<Kladr> getDistricts(String subject) {
+        return kladrDao.getDistricts(subject);
+    }
+
+    @Override
+    public List<Kladr> getCities(String subject, String district) {
+        return kladrDao.getCities(subject, district);
+    }
+
+    @Override
+    public List<Kladr> getCountries(String subject, String district, String city) {
+        return kladrDao.getCountries(subject, district, city);
+    }
 }

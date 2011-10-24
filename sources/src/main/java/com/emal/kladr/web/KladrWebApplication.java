@@ -57,9 +57,11 @@ public class KladrWebApplication extends Application {
             public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
                 Kladr kladr = (Kladr) valueChangeEvent.getProperty().getValue();
                 log.debug("Choose [" + kladr + "]");
-                String area = kladr.getArea();
-                List<Kladr> list = addressService.getKladrsByCode(area);
+                String area = kladr.getSubject();
+                List<Kladr> list = addressService.getDistricts(area);
                 districts.removeAllItems();
+                Kladr emptyValue = Kladr.EMPTY_VALUE;
+                districts.addItem(emptyValue);
                 for (Kladr dist : list) {
                     districts.addItem(dist);
                 }
@@ -68,19 +70,57 @@ public class KladrWebApplication extends Application {
         window.addComponent(subjects);
 
         districts = new ComboBox("Районы");
+        districts.addListener(new Property.ValueChangeListener() {
+
+            @Override
+            public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+                Kladr kladr = (Kladr) valueChangeEvent.getProperty().getValue();
+                log.debug("Choose [" + kladr + "]");
+
+                String area = kladr.getSubject();
+                String district = kladr.getDistrict();
+                List<Kladr> list = addressService.getCities(area, district);
+                cities.removeAllItems();
+                cities.addItem(Kladr.EMPTY_VALUE);
+                for (Kladr dist : list) {
+                    cities.addItem(dist);
+                }
+            }
+        });
 
         window.addComponent(districts);
 
         cities = new ComboBox("Города");
+        cities.addListener(new Property.ValueChangeListener() {
+
+            @Override
+            public void valueChange(Property.ValueChangeEvent valueChangeEvent) {
+                Kladr kladr = (Kladr) valueChangeEvent.getProperty().getValue();
+                log.debug("Choose [" + kladr + "]");
+                String area = kladr.getSubject();
+                String district = kladr.getDistrict();
+                String city = kladr.getCity();
+                List<Kladr> list = addressService.getCountries(area, district, city);
+                countries.removeAllItems();
+                countries.addItem(Kladr.EMPTY_VALUE);
+                for (Kladr dist : list) {
+                    countries.addItem(dist);
+                }
+            }
+        });
         window.addComponent(cities);
 
         countries = new ComboBox("Населенные пункты");
         window.addComponent(countries);
 
-        Button button = new Button("Click Me");
+        Button button = new Button("Сбросить");
         button.addListener(new Button.ClickListener() {
             public void buttonClick(Button.ClickEvent event) {
-//                window.addComponent(new Label("Code [" + code + "] has value [" + name + "]"));
+                subjects.discard();
+                districts.removeAllItems();
+                cities.removeAllItems();
+                countries.removeAllItems();
+
             }
         });
         window.addComponent(button);
