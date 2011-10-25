@@ -14,6 +14,5 @@ public interface AddressService {
 
     public List<Kladr> getRFSubjects();
     public List<Kladr> getDistricts(String subject);
-    public List<Kladr> getCities(String subject, String district);
-    public List<Kladr> getCountries(String subject, String district, String city);
+    public List<Kladr> getLocalities(String subject, String district);
 }

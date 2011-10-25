@@ -21,7 +21,7 @@ public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
     private static final Logger log = LoggerFactory.getLogger(KladrDaoImpl.class);
 
     @Override
-    public List<Kladr> getRFSubjects() {
+    public List<Kladr> getRegions() {
         String sql = "select * from " + getDaoTable() + " where code like '%00000000000' order by name ASC;";
         log.debug("Query [ " + sql +" ]");
         List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
@@ -31,7 +31,7 @@ public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
 
     @Override
     public List<Kladr> getDistricts(String subject) {
-        String sql = "select * from " + getDaoTable() + " where code like '" + subject + "%00000000' order by name ASC;";
+        String sql = "select * from " + getDaoTable() + " where code like '" + subject + "%00000000' and code != '"+subject +"00000000000' order by name ASC;";
         log.debug("Query [ " + sql +" ]");
         List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
         log.debug("Result set size [ " + list.size() + " ]");
@@ -39,17 +39,8 @@ public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
     }
 
     @Override
-    public List<Kladr> getCities(String subject, String district) {
-        String sql = "select * from " + getDaoTable() + " where code like '" + subject + district + "%00000' order by name ASC;";
-        log.debug("Query [ " + sql +" ]");
-        List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
-        log.debug("Result set size [ " + list.size() + " ]");
-        return list;
-    }
-
-    @Override
-    public List<Kladr> getCountries(String subject, String district, String city) {
-        String sql = "select * from " + getDaoTable() + " where code like '" + subject + district + city + "%00' order by name ASC;";
+    public List<Kladr> getLocalities(String subject, String district) {
+        String sql = "select * from " + getDaoTable() + " where code like '" + subject + district + "%00' and code != '" + subject + "000%00' order by name ASC;";
         log.debug("Query [ " + sql +" ]");
         List<Kladr> list = jdbcTemplate.query(sql, getRowMapper());
         log.debug("Result set size [ " + list.size() + " ]");

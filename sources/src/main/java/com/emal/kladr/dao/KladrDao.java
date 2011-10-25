@@ -9,11 +9,9 @@ import java.util.List;
  * Date: 15.10.11 22:22
  */
 public interface KladrDao extends BaseDao<Kladr>{
-    public List<Kladr> getRFSubjects();
+    public List<Kladr> getRegions();
 
-    List<Kladr> getDistricts(String subject);
+    public List<Kladr> getDistricts(String subject);
 
-    List<Kladr> getCities(String subject, String district);
-
-    List<Kladr> getCountries(String subject, String district, String city);
+    public List<Kladr> getLocalities(String subject, String district);
 }
