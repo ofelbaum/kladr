@@ -2,6 +2,7 @@ package com.emal.kladr.dao;
 
 import com.emal.kladr.domain.EntityMetadata;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -14,4 +15,5 @@ public interface BaseDao<T extends EntityMetadata> {
     public void deleteAll();
     public T getByCode(String code);
     public List<T> getListByCode(String codePrefix);
+    public long importData(String fileName) throws IOException;
 }

@@ -6,6 +6,5 @@ package com.emal.kladr.domain;
  */
 public abstract class EntityMetadata {
     public abstract String getTableName();
-    public abstract String[] getColumns();
     public abstract Object[] getValues();
 }

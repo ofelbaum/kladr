@@ -49,7 +49,13 @@ public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
 
     @Override
     protected String getDaoTable() {
-        return "KLADR";
+        return Kladr.tableName;
+    }
+
+
+    @Override
+    protected Kladr buildEntity(Object[] rowObjects) {
+        return Kladr.build(rowObjects);
     }
 
     @Override
@@ -57,18 +63,7 @@ public class KladrDaoImpl extends AbstractDaoImpl<Kladr> implements KladrDao {
         return new RowMapper<Kladr>() {
             @Override
             public Kladr mapRow(ResultSet rs, int rowNum) throws SQLException {
-                if (rs.getMetaData().getColumnCount() != 8) {
-                    throw new IllegalArgumentException("Wrong column number");
-                }
-                String name = rs.getString(1);
-                String socr = rs.getString(2);
-                String code = rs.getString(3);
-                String postIndex = rs.getString(4);
-                String gninmb = rs.getString(5);
-                String uno = rs.getString(6);
-                String ocatd = rs.getString(7);
-                String status = rs.getString(8);
-                return new Kladr(name, socr, code, postIndex, gninmb, uno, ocatd, status);
+                return Kladr.build(convertResultSet(rs));
             }
         };
     }

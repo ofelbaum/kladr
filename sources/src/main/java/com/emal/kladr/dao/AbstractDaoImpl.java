@@ -1,12 +1,20 @@
 package com.emal.kladr.dao;
 
 import com.emal.kladr.domain.EntityMetadata;
+import com.linuxense.javadbf.DBFReader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,12 +23,16 @@ import java.util.List;
  * Date: 19.10.11 23:44
  */
 public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseDao<T> {
+    private static final Logger log = LoggerFactory.getLogger(AbstractDaoImpl.class);
+
     @Autowired
     protected JdbcTemplate jdbcTemplate;
 
     protected abstract String getDaoTable();
 
     protected abstract RowMapper<T> getRowMapper();
+
+    protected abstract T buildEntity(Object[] rowObjects);
 
     @Override
     public List<T> findAll() {
@@ -61,6 +73,41 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
             query = "select * from " + getDaoTable() + " where code like '" + codePrefix + "%';";
         }
         return jdbcTemplate.query(query, getRowMapper());
+    }
+
+    protected Object[] convertResultSet(ResultSet rs) throws SQLException {
+        int columnCount = rs.getMetaData().getColumnCount();
+        Object[] rowObject = new Object[columnCount];
+        for (int i = 0; i < columnCount; i++) {
+            rowObject[i] = rs.getObject(i + 1);
+        }
+        return rowObject;
+    }
+
+    @Override
+    public long importData(String fileName) throws IOException {
+        InputStream inputStream = new FileInputStream(fileName);
+
+        DBFReader reader = new DBFReader(inputStream);
+        reader.setCharactersetName("Cp866");
+
+        List<T> kladrs = new ArrayList<T>();
+        Object[] rowObjects;
+        long total = 0;
+        while ((rowObjects = reader.nextRecord()) != null) {
+            T kladr = buildEntity(rowObjects);
+            kladrs.add(kladr);
+            total++;
+            if (kladrs.size() > 50000) {
+                insert(kladrs);
+                log.debug("Flush batch [" + total + "]");
+                kladrs.clear();
+            }
+        }
+        inputStream.close();
+        insert(kladrs);
+        return total;
+
     }
 
     private String[] convert(List<String> list) {

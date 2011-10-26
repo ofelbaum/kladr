@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kladr extends EntityMetadata{
     public static final Kladr EMPTY_VALUE = new Kladr("", "<<...>>", "0000000000000", "000000", "0000", "000", "000000", "00");
+    public static final String tableName = "KLADR";
+    private static final String[] COLUMNS = new String[]{"name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd", "status"};
 
     @XmlElement(name = "name", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String name;
@@ -130,13 +132,7 @@ public class Kladr extends EntityMetadata{
     @Override
     @JsonIgnore
     public String getTableName() {
-        return "KLADR";
-    }
-
-    @Override
-    @JsonIgnore
-    public String[] getColumns() {
-        return new String[]{"name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd", "status"};
+        return tableName;
     }
 
     @Override
@@ -176,5 +172,20 @@ public class Kladr extends EntityMetadata{
     @JsonIgnore
     public String getLocality() {
         return code.substring(5, 11);
+    }
+
+    public static Kladr build(Object[] rowObjects) {
+        if (rowObjects.length != Kladr.COLUMNS.length) {
+            throw new IllegalArgumentException("Wrong column number");
+        }
+        String name = (String) rowObjects[0];
+        String socr = (String) rowObjects[1];
+        String code = (String) rowObjects[2];
+        String postIndex = (String) rowObjects[3];
+        String gninmb = (String) rowObjects[4];
+        String uno = (String) rowObjects[5];
+        String ocatd = (String) rowObjects[6];
+        String status = (String) rowObjects[7];
+        return new Kladr(name, socr, code, postIndex, gninmb, uno, ocatd, status);
     }
 }
