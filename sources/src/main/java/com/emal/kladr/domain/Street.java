@@ -15,7 +15,7 @@ package com.emal.kladr.domain;
  */
 public class Street extends EntityMetadata{
     public static final String tableName = "STREET";
-    private static final String[] COLUMNS = new String[]{"name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd"};
+    private static final String[] COLUMNS = new String[]{"id", "name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd"};
 
     private String name;
     private String socr;
@@ -29,6 +29,17 @@ public class Street extends EntityMetadata{
     }
 
     public Street(String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+        this.name = name;
+        this.socr = socr;
+        this.code = code;
+        this.postIndex = postIndex;
+        this.gninmb = gninmb;
+        this.uno = uno;
+        this.ocatd = ocatd;
+    }
+
+    public Street(Long id, String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+        super(id);
         this.name = name;
         this.socr = socr;
         this.code = code;
@@ -101,20 +112,21 @@ public class Street extends EntityMetadata{
 
     @Override
     public Object[] getValues() {
-        return new Object[]{name, socr, code, postIndex, gninmb, uno, ocatd};
+        return new Object[]{id, name, socr, code, postIndex, gninmb, uno, ocatd};
     }
 
     public static Street build(Object[] rowObjects) {
         if (rowObjects.length != Street.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        String name = (String) rowObjects[0];
-        String socr = (String) rowObjects[1];
-        String code = (String) rowObjects[2];
-        String postIndex = (String) rowObjects[3];
-        String gninmb = (String) rowObjects[4];
-        String uno = (String) rowObjects[5];
-        String ocatd = (String) rowObjects[6];
-        return new Street(name, socr, code, postIndex, gninmb, uno, ocatd);
+        Long id = (Long) rowObjects[0];
+        String name = (String) rowObjects[1];
+        String socr = (String) rowObjects[2];
+        String code = (String) rowObjects[3];
+        String postIndex = (String) rowObjects[4];
+        String gninmb = (String) rowObjects[5];
+        String uno = (String) rowObjects[6];
+        String ocatd = (String) rowObjects[7];
+        return new Street(id, name, socr, code, postIndex, gninmb, uno, ocatd);
     }
 }

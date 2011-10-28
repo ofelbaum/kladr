@@ -92,10 +92,13 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
         reader.setCharactersetName("Cp866");
 
         List<T> kladrs = new ArrayList<T>();
-        Object[] rowObjects;
+        Object[] importRow;
         long total = 0;
-        while ((rowObjects = reader.nextRecord()) != null) {
-            T kladr = buildEntity(rowObjects);
+        while ((importRow = reader.nextRecord()) != null) {
+            int length = importRow.length;
+            Object[] objects = new Object[length + 1];
+            System.arraycopy(importRow, 0, objects, 1, length);
+            T kladr = buildEntity(objects);
             kladrs.add(kladr);
             total++;
             if (kladrs.size() > 50000) {
@@ -105,7 +108,9 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
             }
         }
         inputStream.close();
-        insert(kladrs);
+        if (kladrs.size() > 0) {
+            insert(kladrs);
+        }
         return total;
 
     }
@@ -128,9 +133,13 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
         int size = values.length;
         for (int i = 0; i < size; i++) {
             Object value = values[i];
-            query.append("'")
-                    .append(value.toString().trim())
-                    .append("'");
+            if (value != null) {
+                query.append("'")
+                        .append(value.toString().trim())
+                        .append("'");
+            } else {
+                query.append("NULL");
+            }
             if (i < size - 1) {
                 query.append(",");
             }

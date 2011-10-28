@@ -14,7 +14,7 @@ package com.emal.kladr.domain;
  */
 public class Dom extends EntityMetadata{
     public static final String tableName = "DOMA";
-    private static final String[] COLUMNS = new String[]{"name", "korp", "socr", "code", "postIndex", "gninmb", "uno", "ocatd"};
+    private static final String[] COLUMNS = new String[]{"id", "name", "korp", "socr", "code", "postIndex", "gninmb", "uno", "ocatd"};
 
     private String name;
     private String korp;
@@ -29,6 +29,18 @@ public class Dom extends EntityMetadata{
     }
 
     public Dom(String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+        this.name = name;
+        this.korp = korp;
+        this.socr = socr;
+        this.code = code;
+        this.postIndex = postIndex;
+        this.gninmb = gninmb;
+        this.uno = uno;
+        this.ocatd = ocatd;
+    }
+
+    public Dom(Long id, String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+        super(id);
         this.name = name;
         this.korp = korp;
         this.socr = socr;
@@ -110,21 +122,22 @@ public class Dom extends EntityMetadata{
 
     @Override
     public Object[] getValues() {
-        return new Object[]{name, korp, socr, code, postIndex, gninmb, uno, ocatd};
+        return new Object[]{id, name, korp, socr, code, postIndex, gninmb, uno, ocatd};
     }
 
     public static Dom build(Object[] rowObjects) {
         if (rowObjects.length != Dom.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        String name = (String) rowObjects[0];
-        String korp = (String) rowObjects[1];
-        String socr = (String) rowObjects[2];
-        String code = (String) rowObjects[3];
-        String postIndex = (String) rowObjects[4];
-        String gninmb = (String) rowObjects[5];
-        String uno = (String) rowObjects[6];
-        String ocatd = (String) rowObjects[7];
-        return new Dom(name, korp, socr, code, postIndex, gninmb, uno, ocatd);
+        Long id = (Long) rowObjects[0];
+        String name = (String) rowObjects[1];
+        String korp = (String) rowObjects[2];
+        String socr = (String) rowObjects[3];
+        String code = (String) rowObjects[4];
+        String postIndex = (String) rowObjects[5];
+        String gninmb = (String) rowObjects[6];
+        String uno = (String) rowObjects[7];
+        String ocatd = (String) rowObjects[8];
+        return new Dom(id, name, korp, socr, code, postIndex, gninmb, uno, ocatd);
     }
 }

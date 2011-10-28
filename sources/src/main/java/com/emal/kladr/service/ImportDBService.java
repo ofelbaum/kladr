@@ -1,8 +1,6 @@
 package com.emal.kladr.service;
 
-import com.emal.kladr.dao.DomDao;
-import com.emal.kladr.dao.KladrDao;
-import com.emal.kladr.dao.StreetDao;
+import com.emal.kladr.dao.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,37 +49,41 @@ public class ImportDBService {
     @Autowired
     private DomDao domDao;
 
+    @Autowired
+    private AltnameDao altnameDao;
+
+    @Autowired
+    private FlatDao flatDao;
+
+    @Autowired
+    private SocrbaseDao socrbaseDao;
+
     @PostConstruct
     public void doImport() throws IOException {
         if (Boolean.FALSE.equals(importEnabled)) {
             log.debug("Import ignored");
             return;
         }
-        long total = 0;
-        log.debug("Import started for " + kladrFileName);
-        log.debug("Processing: " + kladrFileName);
-        kladrDao.deleteAll();
-        total = kladrDao.importData(kladrFileName);
-        log.debug("Imported [" + total + "] rows");
-
-        total = 0;
-        log.debug("Import started for " + streetFileName);
-        log.debug("Processing: " + streetFileName);
-        streetDao.deleteAll();
-        total = streetDao.importData(streetFileName);
-        log.debug("Imported [" + total + "] rows");
-        log.debug("Import finished");
-
-        total = 0;
-        log.debug("Import started for " + domaFileName);
-        log.debug("Processing: " + domaFileName);
-        domDao.deleteAll();
-        total = domDao.importData(domaFileName);
-        log.debug("Imported [" + total + "] rows");
-        log.debug("Import finished");
+        log.debug("Import [STARTED]");
+        runImport(kladrDao, kladrFileName);
+        runImport(streetDao, streetFileName);
+        runImport(domDao, domaFileName);
+        runImport(altnameDao, altnamesFileName);
+        runImport(flatDao, flatFileName);
+        runImport(socrbaseDao, socrbaseFileName);
+        log.debug("Import [FINISHED]");
     }
 
     private boolean isSpbRegion(String code) {
         return Pattern.matches("^78\\d+$", code);
+    }
+
+    private void runImport(BaseDao baseDao, String fileName) throws IOException {
+        long total = 0;
+
+        log.debug("Processing: " + fileName);
+        baseDao.deleteAll();
+        total = baseDao.importData(fileName);
+        log.debug("Imported [" + total + "] rows");
     }
 }

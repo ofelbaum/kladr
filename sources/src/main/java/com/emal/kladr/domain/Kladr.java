@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
 public class Kladr extends EntityMetadata{
     public static final Kladr EMPTY_VALUE = new Kladr("", "<<...>>", "0000000000000", "000000", "0000", "000", "000000", "00");
     public static final String tableName = "KLADR";
-    private static final String[] COLUMNS = new String[]{"name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd", "status"};
+    private static final String[] COLUMNS = new String[]{"id", "name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd", "status"};
 
     @XmlElement(name = "name", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String name;
@@ -55,6 +55,18 @@ public class Kladr extends EntityMetadata{
     }
 
     public Kladr(String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd, String status) {
+        this.name = name;
+        this.socr = socr;
+        this.code = code;
+        this.postIndex = postIndex;
+        this.gninmb = gninmb;
+        this.uno = uno;
+        this.ocatd = ocatd;
+        this.status = status;
+    }
+
+    public Kladr(Long id, String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd, String status) {
+        super(id);
         this.name = name;
         this.socr = socr;
         this.code = code;
@@ -138,7 +150,7 @@ public class Kladr extends EntityMetadata{
     @Override
     @JsonIgnore
     public Object[] getValues() {
-        return new String[]{name, socr, code, postIndex, gninmb, uno, ocatd, status};
+        return new Object[]{id, name, socr, code, postIndex, gninmb, uno, ocatd, status};
     }
 
     @Override
@@ -178,14 +190,15 @@ public class Kladr extends EntityMetadata{
         if (rowObjects.length != Kladr.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        String name = (String) rowObjects[0];
-        String socr = (String) rowObjects[1];
-        String code = (String) rowObjects[2];
-        String postIndex = (String) rowObjects[3];
-        String gninmb = (String) rowObjects[4];
-        String uno = (String) rowObjects[5];
-        String ocatd = (String) rowObjects[6];
-        String status = (String) rowObjects[7];
-        return new Kladr(name, socr, code, postIndex, gninmb, uno, ocatd, status);
+        Long id = (Long) rowObjects[0];
+        String name = (String) rowObjects[1];
+        String socr = (String) rowObjects[2];
+        String code = (String) rowObjects[3];
+        String postIndex = (String) rowObjects[4];
+        String gninmb = (String) rowObjects[5];
+        String uno = (String) rowObjects[6];
+        String ocatd = (String) rowObjects[7];
+        String status = (String) rowObjects[8];
+        return new Kladr(id, name, socr, code, postIndex, gninmb, uno, ocatd, status);
     }
 }
