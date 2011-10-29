@@ -28,7 +28,7 @@ public class Flat extends EntityMetadata{
         this.np = np;
     }
 
-    public Flat(Long id, String name, String code, String postIndex, String gninmb, String uno, String np) {
+    public Flat(Integer id, String name, String code, String postIndex, String gninmb, String uno, String np) {
         super(id);
         this.name = name;
         this.code = code;
@@ -100,7 +100,7 @@ public class Flat extends EntityMetadata{
         if (rowObjects.length != Flat.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        Long id = (Long) rowObjects[0];
+        Integer id = (Integer) rowObjects[0];
         String name = (String) rowObjects[1];
         String code = (String) rowObjects[2];
         String postIndex = (String) rowObjects[3];

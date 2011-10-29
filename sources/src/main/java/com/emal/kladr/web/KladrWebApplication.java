@@ -1,14 +1,17 @@
 package com.emal.kladr.web;
 
 import com.emal.kladr.domain.Kladr;
+import com.emal.kladr.domain.Street;
 import com.emal.kladr.service.AddressService;
 import com.emal.kladr.utils.KladrCodeBuilder;
 import com.vaadin.Application;
 import com.vaadin.data.Property;
+import com.vaadin.terminal.Sizeable;
 import com.vaadin.ui.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 
@@ -28,11 +31,12 @@ public class KladrWebApplication extends Application {
     private ComboBox regions;
     private ComboBox districts;
     private ComboBox localities;
-    private ComboBox streets;
+    private ListSelect streetSelect;
 
     @Autowired
     private MessageSource messageSource;
 
+    @Qualifier("addressService")
     @Autowired
     private AddressService addressService;
 
@@ -44,8 +48,9 @@ public class KladrWebApplication extends Application {
         setMainWindow(window);
 
         regions = new ComboBox("Регионы");
-        regions.setFilteringMode(AbstractSelect.Filtering.FILTERINGMODE_OFF);
+        regions.setFilteringMode(AbstractSelect.Filtering.FILTERINGMODE_STARTSWITH);
         regions.setImmediate(true);
+        regions.setNullSelectionAllowed(false);
         regions.setInputPrompt("Выберите субъект");
 
         List<Kladr> rfSubjects = addressService.getRFSubjects();
@@ -85,6 +90,8 @@ public class KladrWebApplication extends Application {
         districts.setInputPrompt("Выберите район");
         districts.setEnabled(false);
         districts.setImmediate(true);
+        districts.setNullSelectionAllowed(false);
+        districts.setFilteringMode(AbstractSelect.Filtering.FILTERINGMODE_STARTSWITH);
         districts.addListener(new Property.ValueChangeListener() {
 
             @Override
@@ -120,6 +127,8 @@ public class KladrWebApplication extends Application {
         localities.setInputPrompt("Выберите населенный пункт");
         localities.setEnabled(false);
         localities.setImmediate(true);
+        localities.setNullSelectionAllowed(false);
+        localities.setFilteringMode(AbstractSelect.Filtering.FILTERINGMODE_STARTSWITH);
         localities.addListener(new Property.ValueChangeListener() {
 
             @Override
@@ -127,18 +136,43 @@ public class KladrWebApplication extends Application {
                 Kladr kladr = (Kladr) valueChangeEvent.getProperty().getValue();
                 log.debug("Choose [" + kladr + "]");
                 if (kladr == null) {
+                    streetSelect.removeAllItems();
+                    streetSelect.setEnabled(false);
                     return;
                 }
-                String area = kladr.getRegion();
+                String region = kladr.getRegion();
                 String district = kladr.getDistrict();
-                String city = kladr.getCity();
+                String locality = kladr.getLocality();
+                List<Street> streetsList = addressService.getStreets(region, district, locality);
+
+                streetSelect.removeAllItems();
+                for (Street street : streetsList) {
+                    streetSelect.addItem(street);
+                }
+                streetSelect.setEnabled(true);
+
             }
         });
         window.addComponent(localities);
 
-        streets = new ComboBox("Улицы");
-        streets.setInputPrompt("Выберите улицу");
-        window.addComponent(streets);
+        streetSelect = new ListSelect("Выберите улицу");
+        streetSelect.setRows(15);
+        streetSelect.setNullSelectionAllowed(false);
+        streetSelect.setImmediate(true);
+        streetSelect.setEnabled(false);
+        streetSelect.setWidth(100, Sizeable.UNITS_PERCENTAGE);
+        streetSelect.addListener(new Property.ValueChangeListener(){
+            @Override
+            public void valueChange(Property.ValueChangeEvent event) {
+                Street street = (Street) event.getProperty().getValue();
+                if (street == null) {
+                    return;
+                }
+                log.debug("Index [" + street.getPostIndex() + "]\t Code [" + street.getCode() + "]");
+
+            }
+        });
+        window.addComponent(streetSelect);
 
         Button button = new Button("Сбросить");
         button.addListener(new Button.ClickListener() {

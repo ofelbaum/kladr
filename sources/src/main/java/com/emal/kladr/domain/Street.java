@@ -38,7 +38,7 @@ public class Street extends EntityMetadata{
         this.ocatd = ocatd;
     }
 
-    public Street(Long id, String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+    public Street(Integer id, String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
         super(id);
         this.name = name;
         this.socr = socr;
@@ -115,11 +115,19 @@ public class Street extends EntityMetadata{
         return new Object[]{id, name, socr, code, postIndex, gninmb, uno, ocatd};
     }
 
+    @Override
+    public String toString() {
+        return new StringBuffer(name)
+                .append(" ")
+                .append(socr)
+                .toString();
+    }
+
     public static Street build(Object[] rowObjects) {
         if (rowObjects.length != Street.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        Long id = (Long) rowObjects[0];
+        Integer id = (Integer) rowObjects[0];
         String name = (String) rowObjects[1];
         String socr = (String) rowObjects[2];
         String code = (String) rowObjects[3];

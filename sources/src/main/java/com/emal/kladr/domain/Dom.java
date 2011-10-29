@@ -39,7 +39,7 @@ public class Dom extends EntityMetadata{
         this.ocatd = ocatd;
     }
 
-    public Dom(Long id, String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+    public Dom(Integer id, String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
         super(id);
         this.name = name;
         this.korp = korp;
@@ -129,7 +129,7 @@ public class Dom extends EntityMetadata{
         if (rowObjects.length != Dom.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        Long id = (Long) rowObjects[0];
+        Integer id = (Integer) rowObjects[0];
         String name = (String) rowObjects[1];
         String korp = (String) rowObjects[2];
         String socr = (String) rowObjects[3];

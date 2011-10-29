@@ -23,7 +23,7 @@ public class Socrbase extends EntityMetadata{
         this.kod_t_st = kod_t_st;
     }
 
-    public Socrbase(Long id, String level, String scname, String socrname, String kod_t_st) {
+    public Socrbase(Integer id, String level, String scname, String socrname, String kod_t_st) {
         super(id);
         this.level = level;
         this.scname = scname;
@@ -77,7 +77,7 @@ public class Socrbase extends EntityMetadata{
         if (rowObjects.length != Socrbase.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        Long id = (Long) rowObjects[0];
+        Integer id = (Integer) rowObjects[0];
         String level = (String) rowObjects[1];
         String scname = (String) rowObjects[2];
         String socrname = (String) rowObjects[3];

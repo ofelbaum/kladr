@@ -65,7 +65,7 @@ public class Kladr extends EntityMetadata{
         this.status = status;
     }
 
-    public Kladr(Long id, String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd, String status) {
+    public Kladr(Integer id, String name, String socr, String code, String postIndex, String gninmb, String uno, String ocatd, String status) {
         super(id);
         this.name = name;
         this.socr = socr;
@@ -190,7 +190,7 @@ public class Kladr extends EntityMetadata{
         if (rowObjects.length != Kladr.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        Long id = (Long) rowObjects[0];
+        Integer id = (Integer) rowObjects[0];
         String name = (String) rowObjects[1];
         String socr = (String) rowObjects[2];
         String code = (String) rowObjects[3];

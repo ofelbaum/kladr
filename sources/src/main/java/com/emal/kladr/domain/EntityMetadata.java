@@ -6,7 +6,7 @@ package com.emal.kladr.domain;
  */
 public abstract class EntityMetadata {
 
-    protected Long id;
+    protected Integer id;
 
     public abstract String getTableName();
     public abstract Object[] getValues();
@@ -14,15 +14,15 @@ public abstract class EntityMetadata {
     protected EntityMetadata() {
     }
 
-    protected EntityMetadata(Long id) {
+    protected EntityMetadata(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

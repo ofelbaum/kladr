@@ -1,7 +1,9 @@
 package com.emal.kladr.service.impl;
 
 import com.emal.kladr.dao.KladrDao;
+import com.emal.kladr.dao.StreetDao;
 import com.emal.kladr.domain.Kladr;
+import com.emal.kladr.domain.Street;
 import com.emal.kladr.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +14,14 @@ import java.util.List;
  * User: admin
  * Date: 23.10.11 14:24
  */
-@Service
+@Service("addressService")
 public class AddressServiceImpl implements AddressService{
 
     @Autowired
     private KladrDao kladrDao;
+
+    @Autowired
+    private StreetDao streetDao;
 
     @Override
     public Kladr getKladrByCode(String code) {
@@ -41,5 +46,10 @@ public class AddressServiceImpl implements AddressService{
     @Override
     public List<Kladr> getLocalities(String subject, String district) {
         return kladrDao.getLocalities(subject, district);
+    }
+
+    @Override
+    public List<Street> getStreets(String subject, String district, String locality) {
+        return streetDao.getListByCode(subject + district + locality);
     }
 }

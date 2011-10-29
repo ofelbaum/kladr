@@ -21,7 +21,7 @@ public class Altname extends EntityMetadata {
         this.level = level;
     }
 
-    public Altname(Long id, String oldCode, String newCode, String level) {
+    public Altname(Integer id, String oldCode, String newCode, String level) {
         super(id);
         this.oldCode = oldCode;
         this.newCode = newCode;
@@ -66,7 +66,7 @@ public class Altname extends EntityMetadata {
         if (rowObjects.length != Altname.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
-        Long id = (Long) rowObjects[0];
+        Integer id = (Integer) rowObjects[0];
         String oldCode = (String) rowObjects[1];
         String newCode = (String) rowObjects[2];
         String level = (String) rowObjects[3];

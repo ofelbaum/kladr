@@ -1,6 +1,7 @@
 package com.emal.kladr.service;
 
 import com.emal.kladr.domain.Kladr;
+import com.emal.kladr.domain.Street;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface AddressService {
     public List<Kladr> getRFSubjects();
     public List<Kladr> getDistricts(String subject);
     public List<Kladr> getLocalities(String subject, String district);
+    public List<Street> getStreets(String subject, String district, String locality);
 }
