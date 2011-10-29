@@ -5,7 +5,6 @@ import com.linuxense.javadbf.DBFReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.util.Assert;
@@ -28,9 +27,6 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;
-
-    @Value("${ds.schema}")
-    private String schema;
 
     protected abstract String getDaoTable();
 
@@ -57,13 +53,13 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
 
     @Override
     public void deleteAll() {
-        jdbcTemplate.execute("delete from " + schema + getDaoTable() + ";");
+        jdbcTemplate.execute("delete from " + getDaoTable() + ";");
     }
 
     @Override
     public T getByCode(String code) {
         Assert.hasText(code);
-        List<T> results = jdbcTemplate.query("select * from " + schema + getDaoTable() + " where code='" + code + "';", getRowMapper());
+        List<T> results = jdbcTemplate.query("select * from " + getDaoTable() + " where code='" + code + "';", getRowMapper());
         if (results.size() != 1) {
             throw new IllegalStateException("Not unique result for code [" + code + "]");
         }
@@ -74,7 +70,7 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
     public List<T> getListByCode(String codePrefix) {
         String query = "select * from " + getDaoTable() + ";";
         if (StringUtils.hasText(codePrefix)) {
-            query = "select * from " + schema + getDaoTable() + " where code like '" + codePrefix + "%' order by name;";
+            query = "select * from " + getDaoTable() + " where code like '" + codePrefix + "%' order by name;";
         }
         return jdbcTemplate.query(query, getRowMapper());
     }
@@ -130,7 +126,6 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
 
     private String createInsertQuery(T entity) {
         StringBuffer query = new StringBuffer("INSERT INTO ")
-                .append(schema)
                 .append(entity.getTableName())
                 .append(" VALUES (");
 

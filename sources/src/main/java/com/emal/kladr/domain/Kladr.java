@@ -1,5 +1,6 @@
 package com.emal.kladr.domain;
 
+import com.emal.kladr.utils.KladrCodeHelper;
 import com.emal.kladr.webservice.HolidayEndpoint;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -159,31 +160,6 @@ public class Kladr extends EntityMetadata{
         return new StringBuffer(name)
                 .append(" ")
                 .append(socr).toString();
-    }
-
-    @JsonIgnore
-    public String getRegion() {
-        return code.substring(0, 2);
-    }
-
-    @JsonIgnore
-    public String getDistrict() {
-        return code.substring(2, 5);
-    }
-
-    @JsonIgnore
-    public String getCity() {
-        return code.substring(5, 8);
-    }
-
-    @JsonIgnore
-    public String getCountry() {
-        return code.substring(8, 11);
-    }
-
-    @JsonIgnore
-    public String getLocality() {
-        return code.substring(5, 11);
     }
 
     public static Kladr build(Object[] rowObjects) {
