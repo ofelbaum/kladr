@@ -77,9 +77,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hsqldb</groupId>
+            <groupId>hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
-            <version>2.2.4</version>
+            <version>1.8.1.3</version>
         </dependency>
 
         <dependency>
@@ -152,6 +152,10 @@
             <id>spring-milestone</id>
             <name>Spring Maven MILESTONE Repository</name>
             <url>http://maven.springframework.org/milestone</url>
+        </repository>
+        <repository>
+            <id>hsqldb</id>
+            <url>http://logicaldoc.sourceforge.net/maven/</url>
         </repository>
         <repository>
             <id>javadbf</id>
