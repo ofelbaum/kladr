@@ -39,7 +39,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public List<Kladr> getRFSubjects() {
+    public List<Kladr> getRegions() {
         return kladrDao.getRegions();
     }
 
@@ -59,7 +59,12 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public List<Dom> getDoms(String subject, String district, String locality, String street) {
+    public List<Street> getStreets(String subject, String district, String locality, String streetNamePrefix) {
+        return streetDao.getListByCode(subject + district + locality, streetNamePrefix);
+    }
+
+    @Override
+    public List<Dom> getBuildings(String subject, String district, String locality, String street) {
         return domDao.getListByCode(subject + district + locality + street);
     }
 }

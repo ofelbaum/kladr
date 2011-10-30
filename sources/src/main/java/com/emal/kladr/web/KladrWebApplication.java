@@ -57,8 +57,8 @@ public class KladrWebApplication extends Application {
         regions.setNullSelectionAllowed(false);
         regions.setInputPrompt("Выберите субъект");
 
-        List<Kladr> rfSubjects = addressService.getRFSubjects();
-        for (Kladr kladr : rfSubjects) {
+        List<Kladr> regions1 = addressService.getRegions();
+        for (Kladr kladr : regions1) {
             regions.addItem(kladr);
         }
         regions.addListener(new Property.ValueChangeListener() {
@@ -183,9 +183,9 @@ public class KladrWebApplication extends Application {
                 String district = KladrCodeHelper.getDistrict(street.getCode());
                 String locality = KladrCodeHelper.getLocality(street.getCode());
                 String str = KladrCodeHelper.getStreet(street.getCode());
-                List<Dom> doms = addressService.getDoms(region, district, locality, str);
+                List<Dom> buildings = addressService.getBuildings(region, district, locality, str);
 
-                table.setContainerDataSource(new BeanItemContainer(Dom.class, doms));
+                table.setContainerDataSource(new BeanItemContainer(Dom.class, buildings));
                 table.setVisibleColumns(new Object[]{"Номер", "Индекс", "КЛАДР"});
                 table.setEnabled(true);
             }

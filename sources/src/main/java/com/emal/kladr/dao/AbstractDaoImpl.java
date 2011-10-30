@@ -75,6 +75,15 @@ public abstract class AbstractDaoImpl<T extends EntityMetadata> implements BaseD
         return jdbcTemplate.query(query, getRowMapper());
     }
 
+    @Override
+    public List<T> getListByCode(String codePrefix, String namePrefix) {
+        String query = "select * from " + getDaoTable() + ";";
+        if (StringUtils.hasText(codePrefix)) {
+            query = "select * from " + getDaoTable() + " where code like '" + codePrefix + "%' and name like '" + namePrefix + "%' order by name;";
+        }
+        return jdbcTemplate.query(query, getRowMapper());
+    }
+
     protected Object[] convertResultSet(ResultSet rs) throws SQLException {
         int columnCount = rs.getMetaData().getColumnCount();
         Object[] rowObject = new Object[columnCount];

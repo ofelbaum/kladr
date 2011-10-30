@@ -1,4 +1,4 @@
-package com.emal.kladr.web;
+package com.emal.kladr.utils;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;

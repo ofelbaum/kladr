@@ -15,5 +15,6 @@ public interface BaseDao<T extends EntityMetadata> {
     public void deleteAll();
     public T getByCode(String code);
     public List<T> getListByCode(String codePrefix);
+    public List<T> getListByCode(String codePrefix, String namePrefix);
     public long importData(String fileName) throws IOException;
 }

@@ -1,5 +1,7 @@
 package com.emal.kladr.domain;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 /**
  * User: admin
  * Date: 19.10.11 23:29
@@ -106,16 +108,19 @@ public class Street extends EntityMetadata{
     }
 
     @Override
+    @JsonIgnore
     public String getTableName() {
         return tableName;
     }
 
     @Override
+    @JsonIgnore
     public Object[] getValues() {
         return new Object[]{id, name, socr, code, postIndex, gninmb, uno, ocatd};
     }
 
     @Override
+    @JsonIgnore
     public String toString() {
         return new StringBuffer(name)
                 .append(" ")
