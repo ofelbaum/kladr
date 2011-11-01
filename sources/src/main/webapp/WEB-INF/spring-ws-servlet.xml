@@ -12,16 +12,10 @@
 
     <sws:annotation-driven/>
 
-    <sws:dynamic-wsdl id="holiday"
-                      portTypeName="HumanResource"
-                      locationUri="/ws/holidayService/"
-                      targetNamespace="http://mycompany.com/hr/definitions">
-        <sws:xsd location="/WEB-INF/hr.xsd"/>
-    </sws:dynamic-wsdl>
     <sws:dynamic-wsdl id="kladr"
-                      portTypeName="KladrResource"
-                      locationUri="/ws/addressService/"
-                      targetNamespace="http://mycompany.com/hr/definitions">
+                      portTypeName="KladrService"
+                      locationUri="/ws/kladrService/"
+                      targetNamespace="http://emal.com/kladr/schemas">
         <sws:xsd location="/WEB-INF/kladr.xsd"/>
     </sws:dynamic-wsdl>
 
@@ -35,16 +29,7 @@
     </bean>
 
     <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-        <!--<property name="contextPath" value="com.app.xml"/>-->
-        <property name="classesToBeBound">
-            <list>
-                <value>com.emal.kladr.xml.EmployeeType</value>
-                <value>com.emal.kladr.xml.HolidayRequest</value>
-                <value>com.emal.kladr.xml.HolidayType</value>
-                <value>com.emal.kladr.xml.KladrRequest</value>
-                <value>com.emal.kladr.domain.Kladr</value>
-            </list>
-        </property>
-        <property name="schema" value="WEB-INF/hr.xsd"/>
+        <property name="contextPath" value="com.emal.kladr.webservice.xml"/>
+        <property name="schema" value="WEB-INF/kladr.xsd"/>
     </bean>
 </beans>

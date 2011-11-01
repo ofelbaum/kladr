@@ -1,13 +1,6 @@
 package com.emal.kladr.domain;
 
-import com.emal.kladr.utils.KladrCodeHelper;
-import com.emal.kladr.webservice.HolidayEndpoint;
 import org.codehaus.jackson.annotate.JsonIgnore;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
 
 /**
  * User: admin
@@ -21,35 +14,18 @@ import javax.xml.bind.annotation.XmlType;
  * АА – признак актуальности адресного объекта.
  *
  */
-@XmlType(name = "kladr", namespace = HolidayEndpoint.NAMESPACE_URI)
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Kladr extends EntityMetadata{
     public static final Kladr EMPTY_VALUE = new Kladr("", "<<...>>", "0000000000000", "000000", "0000", "000", "000000", "00");
     public static final String tableName = "KLADR";
     private static final String[] COLUMNS = new String[]{"id", "name", "socr", "code", "postIndex", "gninmb", "uno", "ocatd", "status"};
 
-    @XmlElement(name = "name", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String name;
-
-    @XmlElement(name = "socr", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String socr;
-
-    @XmlElement(name = "code", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String code;
-
-    @XmlElement(name = "postIndex", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String postIndex;
-
-    @XmlElement(name = "gninmb", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String gninmb;
-
-    @XmlElement(name = "uno", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String uno;
-
-    @XmlElement(name = "ocatd", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String ocatd;
-
-    @XmlElement(name = "status", namespace = HolidayEndpoint.NAMESPACE_URI)
     private String status;
 
     public Kladr() {
