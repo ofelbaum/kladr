@@ -1,6 +1,6 @@
 package com.emal.kladr.web;
 
-import com.emal.kladr.domain.Dom;
+import com.emal.kladr.domain.Building;
 import com.emal.kladr.domain.Kladr;
 import com.emal.kladr.domain.Street;
 import com.emal.kladr.service.AddressService;
@@ -183,9 +183,9 @@ public class KladrWebApplication extends Application {
                 String district = KladrCodeHelper.getDistrict(street.getCode());
                 String locality = KladrCodeHelper.getLocality(street.getCode());
                 String str = KladrCodeHelper.getStreet(street.getCode());
-                List<Dom> buildings = addressService.getBuildings(region, district, locality, str);
+                List<Building> buildings = addressService.getBuildings(region, district, locality, str);
 
-                table.setContainerDataSource(new BeanItemContainer(Dom.class, buildings));
+                table.setContainerDataSource(new BeanItemContainer(Building.class, buildings));
                 table.setVisibleColumns(new Object[]{"Номер", "Индекс", "КЛАДР"});
                 table.setEnabled(true);
             }

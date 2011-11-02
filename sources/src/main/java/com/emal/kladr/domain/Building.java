@@ -14,7 +14,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
  * УУУУ – код улицы (если адрес не содержит наименования улицы, т.е. дома привязаны непосредственно к городу или населенному пункту, то код улицы будет содержать нули – 0000);
  * ДДДД – порядковый номер позиции классификатора с обозначениями домов.
  */
-public class Dom extends EntityMetadata{
+public class Building extends EntityMetadata{
     public static final String tableName = "DOMA";
     private static final String[] COLUMNS = new String[]{"id", "name", "korp", "socr", "code", "postIndex", "gninmb", "uno", "ocatd"};
 
@@ -27,10 +27,10 @@ public class Dom extends EntityMetadata{
     private String uno;
     private String ocatd;
 
-    public Dom() {
+    public Building() {
     }
 
-    public Dom(String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+    public Building(String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
         this.name = name;
         this.korp = korp;
         this.socr = socr;
@@ -41,7 +41,7 @@ public class Dom extends EntityMetadata{
         this.ocatd = ocatd;
     }
 
-    public Dom(Integer id, String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
+    public Building(Integer id, String name, String korp, String socr, String code, String postIndex, String gninmb, String uno, String ocatd) {
         super(id);
         this.name = name;
         this.korp = korp;
@@ -129,8 +129,8 @@ public class Dom extends EntityMetadata{
         return new Object[]{id, name, korp, socr, code, postIndex, gninmb, uno, ocatd};
     }
 
-    public static Dom build(Object[] rowObjects) {
-        if (rowObjects.length != Dom.COLUMNS.length) {
+    public static Building build(Object[] rowObjects) {
+        if (rowObjects.length != Building.COLUMNS.length) {
             throw new IllegalArgumentException("Wrong column number");
         }
         Integer id = (Integer) rowObjects[0];
@@ -142,6 +142,6 @@ public class Dom extends EntityMetadata{
         String gninmb = (String) rowObjects[6];
         String uno = (String) rowObjects[7];
         String ocatd = (String) rowObjects[8];
-        return new Dom(id, name, korp, socr, code, postIndex, gninmb, uno, ocatd);
+        return new Building(id, name, korp, socr, code, postIndex, gninmb, uno, ocatd);
     }
 }

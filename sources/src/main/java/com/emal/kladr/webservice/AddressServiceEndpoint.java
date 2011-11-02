@@ -1,13 +1,13 @@
 package com.emal.kladr.webservice;
 
+import com.emal.kladr.domain.Building;
 import com.emal.kladr.domain.Kladr;
+import com.emal.kladr.domain.Street;
 import com.emal.kladr.service.AddressService;
-import com.emal.kladr.webservice.xml.DistrictsRequest;
-import com.emal.kladr.webservice.xml.KladrResponse;
-import com.emal.kladr.webservice.xml.LocalitiesRequest;
-import com.emal.kladr.webservice.xml.ObjectFactory;
+import com.emal.kladr.webservice.xml.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -61,5 +61,43 @@ public class AddressServiceEndpoint {
             result.add(item);
         }
         return kladrResponse;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "StreetRequest")
+    @ResponsePayload
+    public StreetResponse handleStreetRequest(@RequestPayload StreetRequest streetRequest)
+            throws Exception {
+
+        List<Street> list;
+        String nameStartWith = streetRequest.getNameStartWith();
+        if (StringUtils.hasText(nameStartWith)) {
+            list = addressService.getStreets(streetRequest.getRegion(), streetRequest.getDistrict(), streetRequest.getLocality(), nameStartWith);
+        } else {
+            list = addressService.getStreets(streetRequest.getRegion(), streetRequest.getDistrict(), streetRequest.getLocality());
+        }
+        StreetResponse streetResponse = objectFactory.createStreetResponse();
+        List<com.emal.kladr.webservice.xml.Street> result = streetResponse.getResult();
+        for (com.emal.kladr.domain.Street street : list) {
+            com.emal.kladr.webservice.xml.Street item = objectFactory.createStreet();
+            BeanUtils.copyProperties(street, item);
+            result.add(item);
+        }
+        return streetResponse;
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "BuildingRequest")
+    @ResponsePayload
+    public BuildingResponse handleBuildingRequest(@RequestPayload BuildingRequest buildingRequest)
+            throws Exception {
+
+        List<Building> list = addressService.getBuildings(buildingRequest.getRegion(), buildingRequest.getDistrict(), buildingRequest.getLocality(), buildingRequest.getStreet());
+        BuildingResponse buildingResponse = objectFactory.createBuildingResponse();
+        List<com.emal.kladr.webservice.xml.Building> result = buildingResponse.getResult();
+        for (Building building : list) {
+            com.emal.kladr.webservice.xml.Building item = objectFactory.createBuilding();
+            BeanUtils.copyProperties(building, item);
+            result.add(item);
+        }
+        return buildingResponse;
     }
 }

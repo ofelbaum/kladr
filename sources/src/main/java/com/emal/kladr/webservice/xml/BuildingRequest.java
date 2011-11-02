@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="region" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="district" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="locality" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="nameStartWith" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="street" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,10 +35,10 @@ import javax.xml.bind.annotation.XmlType;
     "region",
     "district",
     "locality",
-    "nameStartWith"
+    "street"
 })
-@XmlRootElement(name = "StreetRequest", namespace = "http://emal.com/kladr/schemas")
-public class StreetRequest {
+@XmlRootElement(name = "BuildingRequest", namespace = "http://emal.com/kladr/schemas")
+public class BuildingRequest {
 
     @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true)
     protected String region;
@@ -46,8 +46,8 @@ public class StreetRequest {
     protected String district;
     @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true)
     protected String locality;
-    @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true, nillable = true)
-    protected String nameStartWith;
+    @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true)
+    protected String street;
 
     /**
      * Gets the value of the region property.
@@ -122,27 +122,27 @@ public class StreetRequest {
     }
 
     /**
-     * Gets the value of the nameStartWith property.
+     * Gets the value of the street property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNameStartWith() {
-        return nameStartWith;
+    public String getStreet() {
+        return street;
     }
 
     /**
-     * Sets the value of the nameStartWith property.
+     * Sets the value of the street property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNameStartWith(String value) {
-        this.nameStartWith = value;
+    public void setStreet(String value) {
+        this.street = value;
     }
 
 }

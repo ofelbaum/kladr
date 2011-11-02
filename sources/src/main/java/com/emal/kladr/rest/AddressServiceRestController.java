@@ -1,6 +1,6 @@
 package com.emal.kladr.rest;
 
-import com.emal.kladr.domain.Dom;
+import com.emal.kladr.domain.Building;
 import com.emal.kladr.domain.Kladr;
 import com.emal.kladr.domain.Street;
 import com.emal.kladr.service.AddressService;
@@ -61,7 +61,7 @@ public class AddressServiceRestController {
 
     @RequestMapping("/{region}/{district}/{locality}/{street}")
     @ResponseBody
-    public List<Dom> getHouses(@PathVariable("region") String region,
+    public List<Building> getHouses(@PathVariable("region") String region,
                                       @PathVariable("district") String district,
                                       @PathVariable("locality") String locality,
                                       @PathVariable("street") String street) {

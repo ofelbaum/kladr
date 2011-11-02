@@ -8,16 +8,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for Street complex type.
+ * <p>Java class for Building complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="Street">
+ * &lt;complexType name="Building">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="korp" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="socr" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="code" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="postIndex" type="{http://www.w3.org/2001/XMLSchema}string"/>
@@ -33,8 +34,9 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Street", namespace = "http://emal.com/kladr/schemas", propOrder = {
+@XmlType(name = "Building", namespace = "http://emal.com/kladr/schemas", propOrder = {
     "name",
+    "korp",
     "socr",
     "code",
     "postIndex",
@@ -42,10 +44,12 @@ import javax.xml.bind.annotation.XmlType;
     "uno",
     "ocatd"
 })
-public class Street {
+public class Building {
 
     @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true)
     protected String name;
+    @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true)
+    protected String korp;
     @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true)
     protected String socr;
     @XmlElement(namespace = "http://emal.com/kladr/schemas", required = true)
@@ -81,6 +85,30 @@ public class Street {
      */
     public void setName(String value) {
         this.name = value;
+    }
+
+    /**
+     * Gets the value of the korp property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getKorp() {
+        return korp;
+    }
+
+    /**
+     * Sets the value of the korp property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setKorp(String value) {
+        this.korp = value;
     }
 
     /**

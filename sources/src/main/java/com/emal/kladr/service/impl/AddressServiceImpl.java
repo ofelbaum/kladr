@@ -1,9 +1,9 @@
 package com.emal.kladr.service.impl;
 
-import com.emal.kladr.dao.DomDao;
+import com.emal.kladr.dao.BuildingDao;
 import com.emal.kladr.dao.KladrDao;
 import com.emal.kladr.dao.StreetDao;
-import com.emal.kladr.domain.Dom;
+import com.emal.kladr.domain.Building;
 import com.emal.kladr.domain.Kladr;
 import com.emal.kladr.domain.Street;
 import com.emal.kladr.service.AddressService;
@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService{
     private StreetDao streetDao;
 
     @Autowired
-    private DomDao domDao;
+    private BuildingDao buildingDao;
 
     @Override
     public Kladr getKladrByCode(String code) {
@@ -64,7 +64,7 @@ public class AddressServiceImpl implements AddressService{
     }
 
     @Override
-    public List<Dom> getBuildings(String subject, String district, String locality, String street) {
-        return domDao.getListByCode(subject + district + locality + street);
+    public List<Building> getBuildings(String subject, String district, String locality, String street) {
+        return buildingDao.getListByCode(subject + district + locality + street);
     }
 }

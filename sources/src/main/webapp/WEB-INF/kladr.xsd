@@ -25,13 +25,25 @@
             <xs:element name="ocatd" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+    <xs:complexType name="Building">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="korp" type="xs:string"/>
+            <xs:element name="socr" type="xs:string"/>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="postIndex" type="xs:string"/>
+            <xs:element name="gninmb" type="xs:string"/>
+            <xs:element name="uno" type="xs:string"/>
+            <xs:element name="ocatd" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:element name="RegionsRequest"/>
 
     <xs:element name="DistrictsRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="region" type="xs:string"/>
+                <xs:element name="region" type="xs:string" nillable="false"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -39,8 +51,8 @@
     <xs:element name="LocalitiesRequest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="region" type="xs:string"/>
-                <xs:element name="district" type="xs:string"/>
+                <xs:element name="region" type="xs:string" nillable="false"/>
+                <xs:element name="district" type="xs:string" nillable="false"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -55,17 +67,36 @@
 
     <xs:element name="StreetRequest">
         <xs:complexType>
-            <xs:all>
+            <xs:sequence>
                 <xs:element name="region" type="xs:string" nillable="false"/>
                 <xs:element name="district" type="xs:string" nillable="false"/>
                 <xs:element name="locality" type="xs:string" nillable="false"/>
-            </xs:all>
+                <xs:element name="nameStartWith" type="xs:string" nillable="true"/>
+            </xs:sequence>
         </xs:complexType>
     </xs:element>
     <xs:element name="StreetResponse">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="street" type="kld:Street"/>
+                <xs:element name="result" minOccurs="0" maxOccurs="unbounded" type="kld:Street"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BuildingRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="region" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                <xs:element name="district" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                <xs:element name="locality" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+                <xs:element name="street" type="xs:string" minOccurs="1" maxOccurs="1" nillable="false"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BuildingResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="result" minOccurs="0" maxOccurs="unbounded" type="kld:Building"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>

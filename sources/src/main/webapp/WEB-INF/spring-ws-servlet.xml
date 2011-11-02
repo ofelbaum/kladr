@@ -13,8 +13,8 @@
     <sws:annotation-driven/>
 
     <sws:dynamic-wsdl id="kladr"
-                      portTypeName="KladrService"
-                      locationUri="/ws/kladrService/"
+                      portTypeName="AddressService"
+                      locationUri="/ws/addressService/"
                       targetNamespace="http://emal.com/kladr/schemas">
         <sws:xsd location="/WEB-INF/kladr.xsd"/>
     </sws:dynamic-wsdl>

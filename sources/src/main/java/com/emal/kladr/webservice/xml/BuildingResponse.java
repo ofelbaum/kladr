@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="result" type="{http://emal.com/kladr/schemas}Street" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="result" type="{http://emal.com/kladr/schemas}Building" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -33,11 +33,11 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "", propOrder = {
     "result"
 })
-@XmlRootElement(name = "StreetResponse", namespace = "http://emal.com/kladr/schemas")
-public class StreetResponse {
+@XmlRootElement(name = "BuildingResponse", namespace = "http://emal.com/kladr/schemas")
+public class BuildingResponse {
 
     @XmlElement(namespace = "http://emal.com/kladr/schemas")
-    protected List<Street> result;
+    protected List<Building> result;
 
     /**
      * Gets the value of the result property.
@@ -57,13 +57,13 @@ public class StreetResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Street }
+     * {@link Building }
      * 
      * 
      */
-    public List<Street> getResult() {
+    public List<Building> getResult() {
         if (result == null) {
-            result = new ArrayList<Street>();
+            result = new ArrayList<Building>();
         }
         return this.result;
     }

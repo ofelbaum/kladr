@@ -1,6 +1,6 @@
 package com.emal.kladr.service;
 
-import com.emal.kladr.domain.Dom;
+import com.emal.kladr.domain.Building;
 import com.emal.kladr.domain.Kladr;
 import com.emal.kladr.domain.Street;
 
@@ -19,5 +19,5 @@ public interface AddressService {
     public List<Kladr> getLocalities(String region, String district);
     public List<Street> getStreets(String region, String district, String locality);
     public List<Street> getStreets(String region, String district, String locality, String streetNamePrefix);
-    public List<Dom> getBuildings(String region, String district, String locality, String street);
+    public List<Building> getBuildings(String region, String district, String locality, String street);
 }

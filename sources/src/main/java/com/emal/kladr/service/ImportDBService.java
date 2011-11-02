@@ -47,7 +47,7 @@ public class ImportDBService {
     private StreetDao streetDao;
 
     @Autowired
-    private DomDao domDao;
+    private BuildingDao buildingDao;
 
     @Autowired
     private AltnameDao altnameDao;
@@ -67,7 +67,7 @@ public class ImportDBService {
         log.debug("Import [STARTED]");
         runImport(kladrDao, kladrFileName);
         runImport(streetDao, streetFileName);
-        runImport(domDao, domaFileName);
+        runImport(buildingDao, domaFileName);
         runImport(altnameDao, altnamesFileName);
         runImport(flatDao, flatFileName);
         runImport(socrbaseDao, socrbaseFileName);
