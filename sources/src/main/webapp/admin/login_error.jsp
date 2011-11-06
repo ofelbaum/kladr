@@ -7,7 +7,7 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Insert title here</title>
-    <link rel="stylesheet" href="../resources/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="<c:url value="/resources/style.css"/>" type="text/css" media="screen"/>
 </head>
 <body>
 <H1 align="center">Access Denied</H1>
