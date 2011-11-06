@@ -1,1 +1,6 @@
-test file
+Application for access to KLADR dictionary
+
+UI - http://ofelbaum.jelastic.com/
+REST - http://ofelbaum.jelastic.com/rest/address/78/000/000000?q=%D0%9F%D0%B5%D1%82%D0%B5%D1%80
+WS - http://ofelbaum.jelastic.com/ws/addressService/kladr.wsdl
+
