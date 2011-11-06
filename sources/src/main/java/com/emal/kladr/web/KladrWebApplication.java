@@ -26,7 +26,7 @@ import java.util.Locale;
  * User: admin
  * Date: 22.10.11 15:24
  */
-@Component("application")
+@Component("clientApplication")
 public class KladrWebApplication extends Application {
     private static final Logger log = LoggerFactory.getLogger(KladrWebApplication.class);
 

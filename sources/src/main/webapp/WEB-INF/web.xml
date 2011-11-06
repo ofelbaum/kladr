@@ -15,6 +15,7 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>
             /WEB-INF/applicationContext.xml
+            /WEB-INF/applicationContext-security.xml
         </param-value>
     </context-param>
 
@@ -54,11 +55,50 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>login</servlet-name>
+        <jsp-file>/admin/login.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>login_error</servlet-name>
+        <jsp-file>/admin/login_error.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>login_error</servlet-name>
+        <url-pattern>/admin/login_error</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>admin</servlet-name>
+        <servlet-class>com.emal.kladr.web.SpringVaadinServlet</servlet-class>
+        <init-param>
+            <param-name>applicationQualifier</param-name>
+            <param-value>adminApplication</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>admin</servlet-name>
+        <url-pattern>/admin/*</url-pattern>
+    </servlet-mapping>
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
         <servlet-name>vaadin</servlet-name>
         <servlet-class>com.emal.kladr.web.SpringVaadinServlet</servlet-class>
         <init-param>
-            <param-name>application</param-name>
-            <param-value>com.emal.kladr.web.KladrWebApplication</param-value>
+            <param-name>applicationQualifier</param-name>
+            <param-value>clientApplication</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -83,4 +123,9 @@
         <filter-name>characterEncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
 </web-app>

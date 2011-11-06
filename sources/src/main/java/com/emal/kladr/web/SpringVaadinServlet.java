@@ -2,6 +2,7 @@ package com.emal.kladr.web;
 
 import com.vaadin.Application;
 import com.vaadin.terminal.gwt.server.AbstractApplicationServlet;
+import org.springframework.util.Assert;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -22,15 +23,20 @@ public class SpringVaadinServlet extends AbstractApplicationServlet {
 
     private Class clazz;
 
+    private String qualifier;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
 
         super.init(config);
 
+        qualifier = config.getInitParameter("applicationQualifier");
+        Assert.hasText(qualifier);
+
         WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(
                 config.getServletContext());
 
-        Application application = (Application) wac.getBean("application", Application.class);
+        Application application = wac.getBean(qualifier, Application.class);
 
         clazz = application.getClass();
     }
@@ -47,7 +53,7 @@ public class SpringVaadinServlet extends AbstractApplicationServlet {
         WebApplicationContext wac = WebApplicationContextUtils.getRequiredWebApplicationContext(
                 request.getSession().getServletContext());
 
-        return (Application) wac.getBean("application", Application.class);
+        return wac.getBean(qualifier, Application.class);
     }
 
     /**
