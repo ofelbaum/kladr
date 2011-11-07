@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/" docBase="ROOT" reloadable="true">
+    <!-- antiResourceLocking="true" -->
+    <Resource name="jdbc/kladr"
+              auth="Container"
+              type="javax.sql.DataSource"
+              description="MySQL DS for Kladr Application"
+              maxActive="100"
+              maxIdle="30"
+              maxWait="10000"
+              username="kladr"
+              password="kladr"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost/kladr"/>
+</Context>
