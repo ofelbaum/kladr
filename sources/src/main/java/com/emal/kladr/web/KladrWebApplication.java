@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,6 +28,7 @@ import java.util.Locale;
  * Date: 22.10.11 15:24
  */
 @Component("clientApplication")
+@Scope(value = "prototype")
 public class KladrWebApplication extends Application {
     private static final Logger log = LoggerFactory.getLogger(KladrWebApplication.class);
 
